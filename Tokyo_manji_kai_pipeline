@@ -32,13 +32,17 @@ pipeline {
             }
             steps {
                 script {
-                    def confirmManger = input(message: 'US de Mars: Avez-vous bien mangé?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'Realise')])
+                   def confirmManger = input(message: 'US de Mars: Avez-vous bien mangé?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseManger')])
                     echo "Bien manger: ${confirmManger}"
 
-                    def confirmExercice = input(message: 'US de Mars: Avez-vous fait de l\'exercice?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'Realise')])
+                    def confirmExercice = input(message: 'US de Mars: Avez-vous fait de l\'exercice?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseExercice')])
                     echo "Faire de l'exercice: ${confirmExercice}"
 
-                    // Répétez pour d'autres US de Mars si nécessaire
+                    def confirmFumer = input(message: 'US de Mars: Avez-vous arrêté de fumer?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseFumer')])
+                    echo "Arrêter de fumer: ${confirmFumer}"
+
+                    def confirmSoin = input(message: 'US de Mars: Avez-vous pris soin de vous?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseSoin')])
+                    echo "Prendre soin de soi: ${confirmSoin}"
                 }
             }
         }
