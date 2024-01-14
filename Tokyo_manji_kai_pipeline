@@ -1,42 +1,47 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
+        choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars'], description: 'Choisissez le mois')
     }
     stages {
-        stage('Demande d\'informations supplémentaires') {
+        stage('US pour Janvier') {
+            when {
+                expression { params.MOIS == 'Janvier' }
+            }
             steps {
                 script {
-                    // Initialisation des variables pour les User Stories
-                    def userStoriesJanvier = ['Rédiger un journal intime']
-                    def userStoriesFevrier = ['Rendre votre espace plus agréable']
-                    def userStoriesMars = ['Manger sainement', 'Faire de l\'exercice', 'Arrêter de fumer', 'Prendre soin de soi']
-
-                    def selectedMonth = params.MOIS
-                    def selectedUS = []
-
-                    // Sélection des User Stories en fonction du mois
-                    switch(selectedMonth) {
-                        case 'Janvier':
-                            selectedUS = userStoriesJanvier
-                            break
-                        case 'Fevrier':
-                            selectedUS = userStoriesFevrier
-                            break
-                        case 'Mars':
-                            selectedUS = userStoriesMars
-                            break
-                        // Ajoutez des cas pour d'autres mois si nécessaire
-                    }
-
-                    // Demander à l'utilisateur de confirmer les US réalisées
-                    for(us in selectedUS) {
-                        input "Avez-vous complété cette User Story: ${us}?"
-                    }
+                    def confirmJournal = input(message: 'US de Janvier: Avez-vous rédigé un journal intime?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'Realise')])
+                    echo "Rédiger un journal intime: ${confirmJournal}"
                 }
             }
         }
+        stage('US pour Février') {
+            when {
+                expression { params.MOIS == 'Fevrier' }
+            }
+            steps {
+                script {
+                    def confirmEspace = input(message: 'US de Février: Avez-vous rendu votre espace plus agréable?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'Realise')])
+                    echo "Rendre votre espace plus agréable: ${confirmEspace}"
+                }
+            }
+        }
+        stage('US pour Mars') {
+            when {
+                expression { params.MOIS == 'Mars' }
+            }
+            steps {
+                script {
+                    def confirmManger = input(message: 'US de Mars: Avez-vous bien mangé?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'Realise')])
+                    echo "Bien manger: ${confirmManger}"
 
-        // Ajoutez d'autres stages pour le traitement des données recueillies
+                    def confirmExercice = input(message: 'US de Mars: Avez-vous fait de l\'exercice?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'Realise')])
+                    echo "Faire de l'exercice: ${confirmExercice}"
+
+                    // Répétez pour d'autres US de Mars si nécessaire
+                }
+            }
+        }
+        // Ajoutez des stages similaires pour les autres mois si nécessaire
     }
 }
