@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         choice(name: 'Mois', choices: ['Janvier', 'Fevrier','Mars','Avril','Mai','Juin','juillet','Aout','Septembre','Octobre','Novembre','Decembre'], description: 'Choose the right month')
-        integer(name: 'DAY_OF_MONTH', description: 'Enter the day of the month')
+        choice(name: 'DATE_DU_JOUR', choices: ['1', '2', '3', '4', '5', '6', '7','8', '9', '10','11', '12','13', '14', '15', '16', '17', '18', '19','20', '21', '22','23', '24','25','26','27','28','29','30','31'], description: 'Quel est la date du jour ?')
         booleanParam(name: 'JANVIER_JOURNAL', defaultValue: false, description: 'Avez-vous rédigé un journal intime en janvier?')
         booleanParam(name: 'FEVRIER_ESPACE_AGREABLE', defaultValue: false, description: 'Avez-vous rendu votre espace plus agréable en février?')
         booleanParam(name: 'MARS_MANGER', defaultValue: false, description: 'Avez-vous bien mangé en mars?')
@@ -16,7 +16,7 @@ pipeline {
                 script {
                    
                     
-                    def day="${params.DAY_OF_MONTH}"
+                    def day="${params.DATE_DU_JOUR'}"
                     def month="${params.Mois}"
                    switch (month) {
                         case "Janvier":
