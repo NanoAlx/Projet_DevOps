@@ -14,16 +14,23 @@ pipeline {
         stage('Start') {
             steps {
                 script {
-                   
-                    
-                    def day="${params.DATE_DU_JOUR}"
-                    def month="${params.Mois}"
-                   switch (month) {
+                    def day = "${params.DATE_DU_JOUR}"
+                    def month = "${params.Mois}"
+
+                    switch (month) {
                         case "Janvier":
-                            println("Janvier: Journal intime - " + params.JANVIER_JOURNAL)
+                            if(params.JANVIER_JOURNAL) {
+                                println("Objectif de janvier (Journal) complété.")
+                            } else {
+                                println("Objectif de janvier (Journal) non complété.")
+                            }
                             break;
                         case "Fevrier":
-                            println("Février: Espace Agréable - " + params.FEVRIER_ESPACE_AGREABLE)
+                            if(params.FEVRIER_ESPACE_AGREABLE) {
+                                println("Objectif de février (Espace Agréable) complété.")
+                            } else {
+                                println("Objectif de février (Espace Agréable) non complété.")
+                            }
                             break;
                         case "Mars":
                             println("Mars: Manger - " + params.MARS_MANGER)
@@ -31,12 +38,10 @@ pipeline {
                             println("Mars: Fumer - " + params.MARS_FUMER)
                             println("Mars: Soin de Soi - " + params.MARS_SOIN_DE_SOI)
                             break;
-                        }
-                    
-
-
+                        // Ajoutez des cas pour les autres mois si nécessaire
+                    }
                 }
             }
         }
-   }
+    }
 }
