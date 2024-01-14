@@ -1,47 +1,51 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'Mois', choices: ['Janvier', 'Fevrier','Mars','Avril','Mai','Juin','juillet','Aout','Septembre','Octobre','Novembre','Decembre'], description: 'Choose the right month')
-        choice(name: 'DATE_DU_JOUR', choices: ['1', '2', '3', '4', '5', '6', '7','8', '9', '10','11', '12','13', '14', '15', '16', '17', '18', '19','20', '21', '22','23', '24','25','26','27','28','29','30','31'], description: 'Quel est la date du jour ?')
-        booleanParam(name: 'JANVIER_JOURNAL', defaultValue: false, description: 'Avez-vous rédigé un journal intime en janvier?')
-        booleanParam(name: 'FEVRIER_ESPACE_AGREABLE', defaultValue: false, description: 'Avez-vous rendu votre espace plus agréable en février?')
-        booleanParam(name: 'MARS_MANGER', defaultValue: false, description: 'Avez-vous bien mangé en mars?')
-        booleanParam(name: 'MARS_EXERCICE', defaultValue: false, description: 'Avez-vous fait de l\'exercice en mars?')
-        booleanParam(name: 'MARS_FUMER', defaultValue: false, description: 'Avez-vous arrêté de fumer en mars?')
-        booleanParam(name: 'MARS_SOIN_DE_SOI', defaultValue: false, description: 'Avez-vous pris soin de vous en mars?')
+        choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
+        booleanParam(name: 'JANVIER_JOURNAL', defaultValue: false, description: 'En janvier, avez-vous rédigé un journal intime?')
+        booleanParam(name: 'FEVRIER_ESPACE_AGREABLE', defaultValue: false, description: 'En février, avez-vous rendu votre espace plus agréable?')
+        booleanParam(name: 'MARS_MANGER', defaultValue: false, description: 'En mars, avez-vous bien mangé?')
+        booleanParam(name: 'MARS_EXERCICE', defaultValue: false, description: 'En mars, avez-vous fait de l\'exercice?')
+        booleanParam(name: 'MARS_FUMER', defaultValue: false, description: 'En mars, avez-vous arrêté de fumer?')
+        booleanParam(name: 'MARS_SOIN_DE_SOI', defaultValue: false, description: 'En mars, avez-vous pris soin de vous?')
     }
     stages {
-        stage('Start') {
+        stage ('Janvier') {
             steps {
                 script {
-                    def day = "${params.DATE_DU_JOUR}"
-                    def month = "${params.Mois}"
-
-                    switch (month) {
-                        case "Janvier":
-                            if(params.JANVIER_JOURNAL) {
-                                println("Objectif de janvier (Journal) complété.")
-                            } else {
-                                println("Objectif de janvier (Journal) non complété.")
-                            }
-                            break;
-                        case "Fevrier":
-                            if(params.FEVRIER_ESPACE_AGREABLE) {
-                                println("Objectif de février (Espace Agréable) complété.")
-                            } else {
-                                println("Objectif de février (Espace Agréable) non complété.")
-                            }
-                            break;
-                        case "Mars":
-                            println("Mars: Manger - " + params.MARS_MANGER)
-                            println("Mars: Exercice - " + params.MARS_EXERCICE)
-                            println("Mars: Fumer - " + params.MARS_FUMER)
-                            println("Mars: Soin de Soi - " + params.MARS_SOIN_DE_SOI)
-                            break;
-                        // Ajoutez des cas pour les autres mois si nécessaire
+                    def mois = "${params.MOIS}"
+                    if (mois == "Janvier") {
+                        echo "Bienvenue au mois de Janvier"
+                        echo "Avez-vous rédigé un journal intime? Réponse: ${params.JANVIER_JOURNAL}"
                     }
                 }
             }
         }
+        stage ('Fevrier') {
+            steps {
+                script {
+                    def mois = "${params.MOIS}"
+                    if (mois == "Fevrier") {
+                        echo "Bienvenue au mois de Février"
+                        echo "Avez-vous rendu votre espace plus agréable? Réponse: ${params.FEVRIER_ESPACE_AGREABLE}"
+                    }
+                }
+            }
+        }
+        stage ('Mars') {
+            steps {
+                script {
+                    def mois = "${params.MOIS}"
+                    if (mois == "Mars") {
+                        echo "Bienvenue au mois de Mars"
+                        echo "Avez-vous bien mangé? Réponse: ${params.MARS_MANGER}"
+                        echo "Avez-vous fait de l'exercice? Réponse: ${params.MARS_EXERCICE}"
+                        echo "Avez-vous arrêté de fumer? Réponse: ${params.MARS_FUMER}"
+                        echo "Avez-vous pris soin de vous? Réponse: ${params.MARS_SOIN_DE_SOI}"
+                    }
+                }
+            }
+        }
+        // Ajoutez d'autres stages pour les autres mois si nécessaire
     }
 }
