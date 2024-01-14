@@ -3,6 +3,12 @@ pipeline {
     parameters {
         choice(name: 'Mois', choices: ['Janvier', 'Fevrier','Mars','Avril','Mai','Juin','juillet','Aout','Septembre','Octobre','Novembre','Decembre'], description: 'Choose the right month')
         integer(name: 'DAY_OF_MONTH', description: 'Enter the day of the month')
+        booleanParam(name: 'JANVIER_JOURNAL', defaultValue: false, description: 'Avez-vous rédigé un journal intime en janvier?')
+        booleanParam(name: 'FEVRIER_ESPACE_AGREABLE', defaultValue: false, description: 'Avez-vous rendu votre espace plus agréable en février?')
+        booleanParam(name: 'MARS_MANGER', defaultValue: false, description: 'Avez-vous bien mangé en mars?')
+        booleanParam(name: 'MARS_EXERCICE', defaultValue: false, description: 'Avez-vous fait de l\'exercice en mars?')
+        booleanParam(name: 'MARS_FUMER', defaultValue: false, description: 'Avez-vous arrêté de fumer en mars?')
+        booleanParam(name: 'MARS_SOIN_DE_SOI', defaultValue: false, description: 'Avez-vous pris soin de vous en mars?')
     }
     stages {
         stage('Start') {
@@ -12,7 +18,20 @@ pipeline {
                     
                     def day="${params.DAY_OF_MONTH}"
                     def month="${params.Mois}"
-                   
+                   switch (month) {
+                        case "Janvier":
+                            println("Janvier: Journal intime - " + params.JANVIER_JOURNAL)
+                            break;
+                        case "Fevrier":
+                            println("Février: Espace Agréable - " + params.FEVRIER_ESPACE_AGREABLE)
+                            break;
+                        case "Mars":
+                            println("Mars: Manger - " + params.MARS_MANGER)
+                            println("Mars: Exercice - " + params.MARS_EXERCICE)
+                            println("Mars: Fumer - " + params.MARS_FUMER)
+                            println("Mars: Soin de Soi - " + params.MARS_SOIN_DE_SOI)
+                            break;
+                        }
                     
 
 
