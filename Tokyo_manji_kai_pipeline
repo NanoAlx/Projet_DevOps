@@ -2,29 +2,19 @@ pipeline {
     agent any
     parameters {
         choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
-       activeChoiceParam('US_CHOISIS') {
-            choiceType('CHECKBOX')
-            groovyScript {
-                script("""
-                    def response = []
-                    switch(params.MOIS) {
-                        case 'Janvier':
-                            response = ['Rédiger un journal intime']
-                            break
-                        case 'Fevrier':
-                            response = ['Rendre votre espace plus agréable']
-                            break
-                        case 'Mars':
-                            response = ['Manger sainement', 'Faire de l\'exercice', 'Arrêter de fumer', 'Prendre soin de soi']
-                            break
-                    }
-                    return response
-                """)
-            }
-        }
+        extendedChoice(name: 'US_CHOISIS', 
+            type: 'PT_CHECKBOX', 
+            multiSelectDelimiter: ',', 
+            groovyScript: """
+                return [
+                    'Janvier': ['Rédiger un journal intime'],
+                    'Fevrier': ['Rendre votre espace plus agréable'],
+                    'Mars': ['Manger sainement', 'Faire de l\'exercice', 'Arrêter de fumer', 'Prendre soin de soi']
+                ].get(params.MOIS, [])
+            """, 
+            description: 'Sélectionnez les User Stories réalisées')
     }
     stages {
-
         stage('Verification') {
             steps {
                 script {
@@ -32,10 +22,6 @@ pipeline {
                 }
             }
         }
-        
-        
-        
-        
         // Ajoutez d'autres stages pour les autres mois si nécessaire
     }
 }
