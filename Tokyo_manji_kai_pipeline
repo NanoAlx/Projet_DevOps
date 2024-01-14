@@ -16,7 +16,7 @@ pipeline {
                 script {
                    
                     
-                    def day="${params.DATE_DU_JOUR'}"
+                    def day="${params.DATE_DU_JOUR}"
                     def month="${params.Mois}"
                    switch (month) {
                         case "Janvier":
