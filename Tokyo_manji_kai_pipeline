@@ -2,26 +2,41 @@ pipeline {
     agent any
     parameters {
         choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
-        extendedChoice(name: 'US_CHOISIS', 
-            type: 'PT_CHECKBOX', 
-            multiSelectDelimiter: ',', 
-            groovyScript: """
-                return [
-                    'Janvier': ['Rédiger un journal intime'],
-                    'Fevrier': ['Rendre votre espace plus agréable'],
-                    'Mars': ['Manger sainement', 'Faire de l\'exercice', 'Arrêter de fumer', 'Prendre soin de soi']
-                ].get(params.MOIS, [])
-            """, 
-            description: 'Sélectionnez les User Stories réalisées')
     }
     stages {
-        stage('Verification') {
+        stage('Demande d\'informations supplémentaires') {
             steps {
                 script {
-                    echo "US choisis pour le mois de ${params.MOIS}: ${params.US_CHOISIS}"
+                    // Initialisation des variables pour les User Stories
+                    def userStoriesJanvier = ['Rédiger un journal intime']
+                    def userStoriesFevrier = ['Rendre votre espace plus agréable']
+                    def userStoriesMars = ['Manger sainement', 'Faire de l\'exercice', 'Arrêter de fumer', 'Prendre soin de soi']
+
+                    def selectedMonth = params.MOIS
+                    def selectedUS = []
+
+                    // Sélection des User Stories en fonction du mois
+                    switch(selectedMonth) {
+                        case 'Janvier':
+                            selectedUS = userStoriesJanvier
+                            break
+                        case 'Fevrier':
+                            selectedUS = userStoriesFevrier
+                            break
+                        case 'Mars':
+                            selectedUS = userStoriesMars
+                            break
+                        // Ajoutez des cas pour d'autres mois si nécessaire
+                    }
+
+                    // Demander à l'utilisateur de confirmer les US réalisées
+                    for(us in selectedUS) {
+                        input "Avez-vous complété cette User Story: ${us}?"
+                    }
                 }
             }
         }
-        // Ajoutez d'autres stages pour les autres mois si nécessaire
+
+        // Ajoutez d'autres stages pour le traitement des données recueillies
     }
 }
