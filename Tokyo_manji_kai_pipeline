@@ -11,22 +11,32 @@ pipeline {
             }
             steps {
                 script {
+                    def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Janvier selon vos besoins
                     def confirmJournal = input(message: 'US de Janvier: Avez-vous rédigé un journal intime?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseJournal')])
                     echo "Rédiger un journal intime: ${confirmJournal}"
+
                     // Ajoutez ici des interactions pour d'autres US de Janvier si nécessaire
+                    def tasksRealized = confirmJournal
+                    calculatePercentage(tasksPossible, tasksRealized)
+                    checkDateAndSpeedUp(params.DATE_DU_JOUR)
                 }
             }
         }
-        
+
         stage('US pour Février') {
             when {
                 expression { params.MOIS == 'Fevrier' }
             }
             steps {
                 script {
+                    def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Février selon vos besoins
                     def confirmEspace = input(message: 'US de Février: Avez-vous rendu votre espace plus agréable?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseEspace')])
                     echo "Rendre votre espace plus agréable: ${confirmEspace}"
+
                     // Ajoutez ici des interactions pour d'autres US de Février si nécessaire
+                    def tasksRealized = confirmEspace
+                    calculatePercentage(tasksPossible, tasksRealized)
+                    checkDateAndSpeedUp(params.DATE_DU_JOUR)
                 }
             }
         }
@@ -37,20 +47,38 @@ pipeline {
             }
             steps {
                 script {
+                    def tasksPossible = 4  // Ajustez le nombre de tâches possibles pour Mars selon vos besoins
                     def confirmManger = input(message: 'US de Mars: Avez-vous bien mangé?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseManger')])
                     echo "Bien manger: ${confirmManger}"
 
-                    def confirmExercice = input(message: 'US de Mars: Avez-vous fait de l\'exercice?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseExercice')])
-                    echo "Faire de l'exercice: ${confirmExercice}"
-
-                    def confirmFumer = input(message: 'US de Mars: Avez-vous arrêté de fumer?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseFumer')])
-                    echo "Arrêter de fumer: ${confirmFumer}"
-
-                    def confirmSoin = input(message: 'US de Mars: Avez-vous pris soin de vous?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseSoin')])
-                    echo "Prendre soin de soi: ${confirmSoin}"
+                    // Ajoutez ici des interactions pour d'autres US de Mars si nécessaire
+                    def tasksRealized = confirmManger
+                    calculatePercentage(tasksPossible, tasksRealized)
+                    checkDateAndSpeedUp(params.DATE_DU_JOUR)
                 }
             }
         }
+
         // Ajoutez des stages similaires pour les autres mois si nécessaire
+    }
+
+    stage('Calcul du pourcentage de tâches réalisées') {
+        steps {
+            script {
+                checkDateAndSpeedUp(params.DATE_DU_JOUR)
+            }
+        }
+    }
+
+    def calculatePercentage(int tasksPossible, int tasksRealized) {
+        def percentageRealized = (tasksRealized / tasksPossible) * 100
+        echo "Pourcentage de tâches réalisées: ${percentageRealized}%"
+    }
+
+    def checkDateAndSpeedUp(String dateDuJour) {
+        def currentDate = dateDuJour.toInteger()
+        if (currentBuild.resultIsBetterOrEqualTo("SUCCESS") && currentDate > 15) {
+            echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
+        }
     }
 }
