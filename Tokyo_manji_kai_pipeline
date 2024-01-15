@@ -110,6 +110,24 @@ pipeline {
             }
         }
     }
+
+    stage('US pour Octobre') {
+    when {
+        expression { params.MOIS == 'Octobre' }
+    }
+    steps {
+        script {
+            def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Octobre selon vos besoins
+
+            def confirmNewKnowledge = input(message: 'US d\'Octobre: Avez-vous acquis de nouvelles connaissances?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseNewKnowledge')])
+            echo "Acquérir de nouvelles connaissances: ${confirmNewKnowledge}"
+
+            def tasksRealized = (confirmNewKnowledge ? 1 : 0)
+
+            afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
+        }
+    }
+}
         // Ajoutez des stages similaires pour les autres mois si nécessaire
     }
 }
