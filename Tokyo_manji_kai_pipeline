@@ -10,7 +10,7 @@ pipeline {
                     def mois = "${params.MOIS}"
 
                     // Appel de la pipeline du mois correspondant
-                    build job: "${mois}-Epic"
+                    build job: "${mois}-Epic.groovy"
                 }
             }
         }
