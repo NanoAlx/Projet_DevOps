@@ -16,7 +16,7 @@ pipeline {
                     echo "Rédiger un journal intime: ${confirmJournal}"
 
                     // Ajoutez ici des interactions pour d'autres US de Janvier si nécessaire
-                    def tasksRealized = confirmJournal
+                    def tasksRealized = confirmJournal ? 1 : 0
                     
                     if (params.DATE_DU_JOUR.toInteger() > 15) {
                         echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
@@ -38,7 +38,7 @@ pipeline {
                     echo "Rendre votre espace plus agréable: ${confirmEspace}"
 
                     // Ajoutez ici des interactions pour d'autres US de Février si nécessaire
-                    def tasksRealized = confirmEspace
+                    def tasksRealized = confirmEspace ? 1 : 0
                     
                     if (params.DATE_DU_JOUR.toInteger() > 15) {
                         echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
@@ -69,7 +69,7 @@ pipeline {
                     echo "Prendre soin de soi: ${confirmSoin}"
 
                     // Ajoutez ici des interactions pour d'autres US de Mars si nécessaire
-                    def tasksRealized = confirmManger
+                    def tasksRealized = (confirmManger ? 1 : 0) + (confirmExercice ? 1 : 0) + (confirmFumer ? 1 : 0) + (confirmSoin ? 1 : 0)
                     
                     if (params.DATE_DU_JOUR.toInteger() > 15) {
                         echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
