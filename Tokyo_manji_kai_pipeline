@@ -1,5 +1,3 @@
-
-
 pipeline {
     agent any
     parameters {
@@ -29,9 +27,7 @@ pipeline {
                     echo "Rendre votre espace plus agréable: ${confirmEspace}"
                     // Ajoutez ici des interactions pour d'autres US de Février si nécessaire
                 }
-            }Il semble y avoir quelques erreurs et incohérences dans votre script Jenkins. Voici une version corrigée :
-
-```groovy
+            }
         }
 
         stage('US pour Mars') {
@@ -57,4 +53,3 @@ pipeline {
         // Ajoutez des stages similaires pour les autres mois si nécessaire
     }
 }
-
