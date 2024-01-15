@@ -1,4 +1,4 @@
-// Mars-Epic.groovy
+// Mars-Epic
 def call() {
     pipeline {
         agent any
