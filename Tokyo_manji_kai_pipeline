@@ -1,4 +1,5 @@
 
+
 pipeline {
     agent any
     parameters {
@@ -47,9 +48,7 @@ pipeline {
 
                     def confirmFumer = input(message: 'US de Mars: Avez-vous arrêté de fumer?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseFumer')])
                     echo "Arrêter de fumer: ${confirmFumer}"
-Il semble y avoir quelques erreurs et incohérences dans votre script Jenkins. Voici une version corrigée :
 
-```groovy
                     def confirmSoin = input(message: 'US de Mars: Avez-vous pris soin de vous?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseSoin')])
                     echo "Prendre soin de soi: ${confirmSoin}"
                 }
