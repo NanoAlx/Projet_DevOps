@@ -4,21 +4,27 @@ pipeline {
         choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
     }
     stages {
+        stage('Configuration Git') {
+            steps {
+                script {
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                }
+            }
+        }
+
         stage('Redirection vers le Job Spécifique au Mois') {
             steps {
                 script {
                     switch(params.MOIS) {
                         case 'Janvier':
-                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
-                            py 'python janvier_script.py'  // Remplacez par votre script Python
+                            py 'python janvier_script.py'  
                             break
 
                         case 'Fevrier':
-                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
-                            sh 'python fevrier_script.py'  // Remplacez par votre script Python
+                            sh 'python fevrier_script.py'  
                             break
 
-                        // Ajoutez des cas pour d'autres mois si nécessaire
+                       
                     }
                 }
             }
