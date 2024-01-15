@@ -4,7 +4,7 @@ pipeline {
          choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
     }
     stages {
-        stage('Redirection vers le Job Spécifique au Mois') {Tokyo_manji_kai_pipeline
+        stage('Redirection vers le Job Spécifique au Mois') {
             steps {
                 script {Tokyo_manji_kai_pipeline
                     switch(params.MOIS) {
