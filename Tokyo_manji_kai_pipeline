@@ -28,7 +28,9 @@ pipeline {
                     echo "Rendre votre espace plus agréable: ${confirmEspace}"
                     // Ajoutez ici des interactions pour d'autres US de Février si nécessaire
                 }
-            }
+            }Il semble y avoir quelques erreurs et incohérences dans votre script Jenkins. Voici une version corrigée :
+
+```groovy
         }
 
         stage('US pour Mars') {
@@ -45,7 +47,9 @@ pipeline {
 
                     def confirmFumer = input(message: 'US de Mars: Avez-vous arrêté de fumer?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseFumer')])
                     echo "Arrêter de fumer: ${confirmFumer}"
+Il semble y avoir quelques erreurs et incohérences dans votre script Jenkins. Voici une version corrigée :
 
+```groovy
                     def confirmSoin = input(message: 'US de Mars: Avez-vous pris soin de vous?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseSoin')])
                     echo "Prendre soin de soi: ${confirmSoin}"
                 }
@@ -54,6 +58,4 @@ pipeline {
         // Ajoutez des stages similaires pour les autres mois si nécessaire
     }
 }
-```
 
-J'ai corrigé les erreurs syntaxiques et ajusté certaines parties du script pour le rendre plus cohérent. Veuillez vérifier attentivement les modifications et les adapter selon vos besoins spécifiques.
