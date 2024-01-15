@@ -9,9 +9,8 @@ pipeline {
                 script {
                     switch(params.MOIS) {
                         case 'Janvier':
-                          git url: 'https://github.com/NanoAlx/Projet_DevOps/'
-                        build job: 'Janvier_Epic', parameters: [string(name: 'STAGE', value: 'Build_A')]
-                        break
+                            build job: './Janvier-Epic', wait: false
+                            break
                         case 'Fevrier':
                             build job: 'Fevrier-Epic', wait: false
                             break
