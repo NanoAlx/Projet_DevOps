@@ -9,7 +9,7 @@ pipeline {
                 script {Tokyo_manji_kai_pipeline
                     switch(params.MOIS) {
                         case 'Janvier':
-                            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
                             build job: 'Janvier_Epic', parameters: [string(name: 'STAGE', value: 'Build_A')]
                             break
 
