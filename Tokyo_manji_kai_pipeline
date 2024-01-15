@@ -1,6 +1,4 @@
-Il semble y avoir quelques erreurs et incohérences dans votre script Jenkins. Voici une version corrigée :
 
-```groovy
 pipeline {
     agent any
     parameters {
