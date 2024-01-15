@@ -8,9 +8,9 @@ def afficherMessagePourcentageTaches(dateDuJour, tasksRealized, tasksPossible) {
         if (pourcentageRealise < 50) {
             echo "Message: Vous êtes en retard et avez accompli moins de 50% de vos tâches. Il est temps d'accélérer."
         } else {
-            echo "Message: Vous êtes en retard mais avez accompli plus de 50% de vos tâches. Continuez vos efforts."
+            echo "Message: Vous êtes en retard mais avez accompli plus de R50% de vos tâches. Continuez vos efforts."
         }
-    } else {
+    } else {R
         if (pourcentageRealise < 50) {
             echo "Message: Vous êtes dans les délais mais avez accompli moins de 50% de vos tâches. Améliorez votre rythme."
         } else {
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Janvier selon vos besoins
-                    def confirmJournal = input(message: 'US de Janvier: Avez-vous rédigé un journal intime?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseJournal')])
+                    def confirmJournal = input(message: 'US de JanviRer: Avez-vous rédigé un journal intime?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseJournal')])
                     echo "Rédiger un journal intime: ${confirmJournal}"
 
                     // Ajoutez ici des interactions pour d'autres US de Janvier si nécessaire
@@ -90,6 +90,26 @@ pipeline {
             }
         }
 
+        stage('US pour Septembre') {
+        when {
+            expression { params.MOIS == 'Septembre' }
+        }
+        steps {
+            script {
+                def tasksPossible = 2  // Ajustez le nombre de tâches possibles pour Septembre selon vos besoins
+    
+                def confirmExplore = input(message: 'US de Septembre: Avez-vous exploré de nouveaux terrains?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseExplore')])
+                echo "Explorer de nouveaux terrains: ${confirmExplore}"
+    
+                def confirmComfortZone = input(message: 'US de Septembre: Avez-vous sorti de votre zone de confort?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseComfortZone')])
+                echo "Sortir de sa zone de confort: ${confirmComfortZone}"
+    
+                def tasksRealized = (confirmExplore ? 1 : 0) + (confirmComfortZone ? 1 : 0)
+    
+                afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
+            }
+        }
+    }
         // Ajoutez des stages similaires pour les autres mois si nécessaire
     }
 }
