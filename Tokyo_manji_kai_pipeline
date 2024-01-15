@@ -11,14 +11,18 @@ pipeline {
             }
             steps {
                 script {
-                    def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Janvier selon vos besoins
                     def confirmJournal = input(message: 'US de Janvier: Avez-vous rédigé un journal intime?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseJournal')])
+                    
                     echo "Rédiger un journal intime: ${confirmJournal}"
-
+                    
+                    if (params.RealiseJournal && params.DATE_DU_JOUR.toInteger() <= 15) {
+                        echo "Bravo! Vous avez réalisé votre objectif pour Janvier avant la moitié du mois."
+                    } else if (params.RealiseJournal && params.DATE_DU_JOUR.toInteger() > 15) {
+                        def joursRestants = 31 - params.DATE_DU_JOUR.toInteger()
+                        echo "Vous avez réalisé votre objectif pour Janvier, il vous reste ${joursRestants} jour(s) pour en faire plus!"
+                    }
                     // Ajoutez ici des interactions pour d'autres US de Janvier si nécessaire
-                    def tasksRealized = confirmJournal
-                    calculatePercentage(tasksPossible, tasksRealized)
-                    checkDateAndSpeedUp(params.DATE_DU_JOUR)
+                
                 }
             }
         }
