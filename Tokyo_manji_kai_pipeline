@@ -24,7 +24,7 @@ def afficherMessagePourcentageTaches(dateDuJour, tasksRealized, tasksPossible) {
 pipeline {
     agent any
     parameters {
-        choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
+        choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars'], description: 'Choisissez le mois')
         choice(name: 'DATE_DU_JOUR', choices: ['1', '2', '3', '4', '5', '6', '7','8', '9', '10','11', '12','13', '14', '15', '16', '17', '18', '19','20', '21', '22','23', '24','25','26','27','28','29','30','31'], description: 'Quel est la date du jour ?')
     }
     stages {
@@ -89,33 +89,7 @@ pipeline {
                 }
             }
         }
-        stage('US pour Mai') {
-            when {
-                expression { params.MOIS == 'Mai' }
-            }
-            steps {
-                script {
-                    def tasksPossible = 4  // Ajustez le nombre de tâches possibles pour Mai selon vos besoins
-                    def confirmVoyage = input(message: 'US de Mai: Avez-vous effectué le voyage?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseVoyage')])
-                    echo "Effectuer le voyage: ${confirmVoyage}"
 
-                    def confirmCrocheter = input(message: 'US de Mai: Avez-vous crocheter quelque chose?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseCrocheter')])
-                    echo "Crocheter quelque chose: ${confirmCrocheter}"
-
-                    def confirmSalsa = input(message: 'US de Mai: Avez-vous dansé la salsa?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseSalsa')])
-                    echo "Danser la salsa: ${confirmSalsa}"
-
-                    def confirmMarathon = input(message: 'US de Mai: Avez-vous participé à un marathon?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseMarathon')])
-                    echo "Participer à un marathon: ${confirmMarathon}"
-
-                    // Ajoutez ici des interactions pour d'autres US de Mai si nécessaire
-                    def tasksRealized = (confirmVoyage ? 1 : 0) + (confirmCrocheter ? 1 : 0) + (confirmSalsa ? 1 : 0) + (confirmMarathon ? 1 : 0)
-                    
-                   afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
-                }
-            }
-        }
         // Ajoutez des stages similaires pour les autres mois si nécessaire
-    
     }
 }
