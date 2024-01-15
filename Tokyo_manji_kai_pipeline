@@ -6,6 +6,20 @@ pipeline {
     stages {
         stage('Redirection vers le Job Spécifique au Mois') {
             steps {
+                script {
+                    switch(params.MOIS) {
+                        case 'Janvier':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Janvier_Epic', parameters: [string(name: 'STAGE', value: 'Build_A')]
+                            break
+pipeline {
+    agent any
+    parameters {
+         choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
+    }
+    stages {
+        stage('Redirection vers le Job Spécifique au Mois') {
+            steps {
                 script {Tokyo_manji_kai_pipeline
                     switch(params.MOIS) {
                         case 'Janvier':
@@ -19,6 +33,82 @@ pipeline {
                             break
 
                         case 'Mars':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Mars-Epic', wait: false
+                            break
+                        // Ajoutez des cases pour d'autres mois si nécessaire
+                    }
+                }
+            }
+        }
+    }
+}
+                        case 'Fevrier':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Fevrier-Epic', wait: false
+                            break
+
+                        case 'Mars':pipeline {
+    agent any
+    parameters {
+         choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
+    }
+    stages {
+        stage('Redirection vers le Job Spécifique au Mois') {
+            steps {
+                script {Tokyo_manji_kai_pipeline
+                    switch(params.MOIS) {
+                        case 'Janvier':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Janvier_Epic', parameters: [string(name: 'STAGE', value: 'Build_A')]
+                            break
+
+                        case 'Fevrier':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Fevrier-Epic', wait: false
+                            break
+pipeline {
+    agent any
+    parameters {
+         choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
+    }
+    stages {
+        stage('Redirection vers le Job Spécifique au Mois') {
+            steps {
+                script {Tokyo_manji_kai_pipeline
+                    switch(params.MOIS) {
+                        case 'Janvier':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Janvier_Epic', parameters: [string(name: 'STAGE', value: 'Build_A')]
+                            break
+
+                        case 'Fevrier':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Fevrier-Epic', wait: false
+                            break
+
+                        case 'Mars':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Mars-Epic', wait: false
+                            break
+                        // Ajoutez des cases pour d'autres mois si nécessaire
+                    }
+                }
+            }
+        }
+    }
+}
+                        case 'Mars':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Mars-Epic', wait: false
+                            break
+                        // Ajoutez des cases pour d'autres mois si nécessaire
+                    }
+                }
+            }
+        }
+    }
+}
                             checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
                             build job: 'Mars-Epic', wait: false
                             break
