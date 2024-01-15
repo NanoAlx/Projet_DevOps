@@ -10,13 +10,13 @@ pipeline {
                 script {
                     switch(params.MOIS) {
                         case 'Janvier':
-                            build job: 'Janvier-US', wait: false
+                            build job: 'Janvier-Epic', wait: false
                             break
                         case 'Fevrier':
-                            build job: 'Fevrier-US', wait: false
+                            build job: 'Fevrier-Epic', wait: false
                             break
                         case 'Mars':
-                            build job: 'Mars-US', wait: false
+                            build job: 'Mars-Epic', wait: false
                             break
                         // Ajoutez des cases pour d'autres mois si nécessaire
                     }
