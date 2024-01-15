@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    parameters {
+        booleanParam(name: 'JANVIER_JOURNAL', defaultValue: false, description: 'Avez-vous rédigé un journal intime?')
+       
+    }
+    stages {
+        stage('Confirmation des US de Janvier') {
+            steps {
+                echo "Confirmation des US pour Janvier"
+                echo "Journal intime: ${params.JANVIER_JOURNAL}"
+                
+            }
+        }
+    }
+}
