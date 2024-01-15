@@ -20,9 +20,18 @@ pipeline {
                     
                     if (params.DATE_DU_JOUR.toInteger() > 15) {
                         echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
+                        if ((tasksRealized / tasksPossible) * 100 < 50) {
+                            echo "Message: Vous êtes en retard et avez accompli moins de 50% de vos tâches. Il est temps d'accélérer."
+                        } else {
+                            echo "Message: Vous êtes en retard mais avez accompli plus de 50% de vos tâches. Continuez vos efforts."
+                        }
+                    } else {
+                        if ((tasksRealized / tasksPossible) * 100 < 50) {
+                            echo "Message: Vous êtes dans les délais mais avez accompli moins de 50% de vos tâches. Améliorez votre rythme."
+                        } else {
+                            echo "Message: Vous êtes dans les délais et avez accompli plus de 50% de vos tâches. Continuez le bon travail."
+                        }
                     }
-                    
-                    echo "Pourcentage de tâches réalisées: ${(tasksRealized / tasksPossible) * 100}%"
                 }
             }
         }
@@ -42,9 +51,18 @@ pipeline {
                     
                     if (params.DATE_DU_JOUR.toInteger() > 15) {
                         echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
+                        if ((tasksRealized / tasksPossible) * 100 < 50) {
+                            echo "Message: Vous êtes en retard et avez accompli moins de 50% de vos tâches. Il est temps d'accélérer."
+                        } else {
+                            echo "Message: Vous êtes en retard mais avez accompli plus de 50% de vos tâches. Continuez vos efforts."
+                        }
+                    } else {
+                        if ((tasksRealized / tasksPossible) * 100 < 50) {
+                            echo "Message: Vous êtes dans les délais mais avez accompli moins de 50% de vos tâches. Améliorez votre rythme."
+                        } else {
+                            echo "Message: Vous êtes dans les délais et avez accompli plus de 50% de vos tâches. Continuez le bon travail."
+                        }
                     }
-                    
-                    echo "Pourcentage de tâches réalisées: ${(tasksRealized / tasksPossible) * 100}%"
                 }
             }
         }
@@ -73,9 +91,18 @@ pipeline {
                     
                     if (params.DATE_DU_JOUR.toInteger() > 15) {
                         echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
+                        if ((tasksRealized / tasksPossible) * 100 < 50) {
+                            echo "Message: Vous êtes en retard et avez accompli moins de 50% de vos tâches. Il est temps d'accélérer."
+                        } else {
+                            echo "Message: Vous êtes en retard mais avez accompli plus de 50% de vos tâches. Continuez vos efforts."
+                        }
+                    } else {
+                        if ((tasksRealized / tasksPossible) * 100 < 50) {
+                            echo "Message: Vous êtes dans les délais mais avez accompli moins de 50% de vos tâches. Améliorez votre rythme."
+                        } else {
+                            echo "Message: Vous êtes dans les délais et avez accompli plus de 50% de vos tâches. Continuez le bon travail."
+                        }
                     }
-                    
-                    echo "Pourcentage de tâches réalisées: ${(tasksRealized / tasksPossible) * 100}%"
                 }
             }
         }
