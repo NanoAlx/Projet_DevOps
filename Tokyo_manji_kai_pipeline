@@ -150,7 +150,7 @@ stage('Epic pour Novembre') {
 // Étape pour Décembre
 stage('US pour Décembre') {
     when {
-        expression { params.MOIS == 'Décembre' }
+        expression { params.MOIS == 'Decembre' }
     }
     steps {
         script {
