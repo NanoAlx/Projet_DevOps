@@ -1,16 +1,24 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars'], description: 'Choisissez le mois')
+         choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
     }
     stages {
-        stage('Appeler le mois') {
+        stage('Redirection vers le Job Spécifique au Mois') {
             steps {
                 script {
-                    def mois = "${params.MOIS}"
-
-                    // Appel de la pipeline du mois correspondant
-                    build job: "${mois}-Epic.groovy"
+                    switch(params.MOIS) {
+                        case 'Janvier':
+                            build job: 'Janvier_Epic', wait: false
+                            break
+                        case 'Fevrier':
+                            build job: 'Fevrier-Epic', wait: false
+                            break
+                        case 'Mars':
+                            build job: 'Mars-Epic', wait: false
+                            break
+                        // Ajoutez des cases pour d'autres mois si nécessaire
+                    }
                 }
             }
         }
