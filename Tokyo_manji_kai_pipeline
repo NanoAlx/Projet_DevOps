@@ -34,7 +34,7 @@ pipeline {
             }
             steps {
                 script {
-                    def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Janvier selon vos besoins
+                    def tasksPossible = 1  // Ajus//tez le nombre de tâches possibles pour Janvier selon vos besoins
                     def confirmJournal = input(message: 'US de JanviRer: Avez-vous rédigé un journal intime?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseJournal')])
                     echo "Rédiger un journal intime: ${confirmJournal}"
 
@@ -43,7 +43,7 @@ pipeline {
                  
                     afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
                 }
-            }
+            }//
         }
 
         stage('US pour Février') {
@@ -146,6 +146,26 @@ stage('Epic pour Novembre') {
         }
     }
 }
+
+// Étape pour Décembre
+stage('US pour Décembre') {
+    when {
+        expression { params.MOIS == 'Décembre' }
+    }
+    steps {
+        script {
+            def tasksPossibleDecembre = 1  // Ajustez le nombre de tâches possibles pour Décembre selon vos besoins
+
+            def confirmBreathingExercise = input(message: 'US de Décembre: Avez-vous fait 5 minutes de prise de conscience sur votre respiration?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseBreathingExercise')])
+            echo "5 minutes de prise de conscience sur la respiration: ${confirmBreathingExercise}"
+
+            def tasksRealizedDecembre = (confirmBreathingExercise ? 1 : 0)
+
+            afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealizedDecembre, tasksPossibleDecembre)
+        }
+    }
+}
+
         // Ajoutez des stages similaires pour les autres mois si nécessaire
     }
 }
