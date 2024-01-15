@@ -10,17 +10,20 @@ pipeline {
                     switch(params.MOIS) {
                         case 'Janvier':
                             checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
-                            build job: 'Janvier_Epic', parameters: [string(name: 'STAGE', value: 'Build_A')]
+                            build job: 'Janvier-Epic', parameters: [string(name: 'STAGE', value: 'Build_A')]
                             break
                             
 
                           
 
-                        case 'Fevrier':
-                            build job: 'Fevrier-Epic', wait: false
+                        case 'Janvier':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Fevrier-Epic', parameters: [string(name: 'STAGE', value: 'Build_A')]
                             break
                         case 'Mars':
-                            build job: 'Mars-Epic', wait: false
+                           case 'Janvier':
+                            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
+                            build job: 'Mars-Epic', parameters: [string(name: 'STAGE', value: 'Build_A')]
                             break
                         // Ajoutez des cases pour d'autres mois si nécessaire
                     }
