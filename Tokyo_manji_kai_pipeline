@@ -128,6 +128,24 @@ pipeline {
         }
     }
 }
+
+stage('Epic pour Novembre') {
+    when {
+        expression { params.MOIS == 'Novembre' }
+    }
+    steps {
+        script {
+            def tasksPossibleEpic = 1  // Ajustez le nombre de tâches possibles pour l'épic de Novembre selon vos besoins
+
+            def confirmPlayInstrument = input(message: 'Epic de Novembre: Avez-vous appris à jouer d\'un instrument?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealisePlayInstrument')])
+            echo "Apprendre à jouer d'un instrument: ${confirmPlayInstrument}"
+
+            def tasksRealizedEpic = (confirmPlayInstrument ? 1 : 0)
+
+            afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealizedEpic, tasksPossibleEpic)
+        }
+    }
+}
         // Ajoutez des stages similaires pour les autres mois si nécessaire
     }
 }
