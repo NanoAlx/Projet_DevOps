@@ -21,7 +21,7 @@ pipeline {
                             break
 
                         case 'Fevrier':
-                            sh 'python fevrier_script.py'  
+                            load 'Fevrier_Epic'  
                             break
 
                        
