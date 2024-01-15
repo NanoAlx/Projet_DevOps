@@ -16,7 +16,3 @@ pipeline {
         }
     }
 }
-
-        // Ajoutez d'autres stages pour les autres mois si nécessaire
-    }
-}
