@@ -1,27 +1,27 @@
 pipeline {
     agent any
     parameters {
-         choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
+        choice(name: 'MOIS', choices: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre','Novembre', 'Decembre'], description: 'Choisissez le mois')
     }
-    stages {Tokyo_manji_kai_pipeline
+    stages {
         stage('Redirection vers le Job Spécifique au Mois') {
             steps {
                 script {
                     switch(params.MOIS) {
                         case 'Janvier':
                             checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
-                            sh 'bash janvier_script.sh'
+                            sh 'python janvier_script.py'  // Remplacez par votre script Python
                             break
 
                         case 'Fevrier':
                             checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/NanoAlx/Projet_DevOps.git']]])
-                            sh 'bash fevrier_script.sh'
+                            sh 'python fevrier_script.py'  // Remplacez par votre script Python
                             break
 
                         // Ajoutez des cas pour d'autres mois si nécessaire
                     }
                 }
-            }Tokyo_manji_kai_pipeline
+            }
         }
     }
 }
