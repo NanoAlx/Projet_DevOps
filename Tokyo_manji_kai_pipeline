@@ -66,23 +66,5 @@ pipeline {
         // Ajoutez des stages similaires pour les autres mois si nécessaire
     }
 
-    stage('Calcul du pourcentage de tâches réalisées') {
-        steps {
-            script {
-                checkDateAndSpeedUp(params.DATE_DU_JOUR)
-            }
-        }
-    }
 
-    def calculatePercentage(int tasksPossible, int tasksRealized) {
-        def percentageRealized = (tasksRealized / tasksPossible) * 100
-        echo "Pourcentage de tâches réalisées: ${percentageRealized}%"
-    }
-
-    def checkDateAndSpeedUp(String dateDuJour) {
-        def currentDate = dateDuJour.toInteger()
-        if (currentBuild.resultIsBetterOrEqualTo("SUCCESS") && currentDate > 15) {
-            echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
-        }
-    }
 }
