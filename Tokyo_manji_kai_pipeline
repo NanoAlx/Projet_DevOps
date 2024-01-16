@@ -184,7 +184,7 @@ pipeline {
 
         stage('US pour Août') {
             when {
-                expression { params.MOIS == 'Août' }
+                expression { params.MOIS == 'Aout' }
             }
             steps {
                 script {
