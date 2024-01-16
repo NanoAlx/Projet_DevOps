@@ -89,6 +89,127 @@ pipeline {
                 }
             }
         }
+        stage('US pour Avril') {
+            when {
+                expression { params.MOIS == 'Avril' }
+            }
+            steps {
+                script {
+                    def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Avril selon vos besoins
+        
+                    def confirmGentil = input(message: 'US d\'Avril: Avez-vous été gentil aujourd\'hui?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseGentil')])
+                    echo "Été gentil: ${confirmGentil}"
+        
+                    // Ajoutez ici des interactions pour d'autres US d'Avril si nécessaire
+                    def tasksRealized = (confirmGentil ? 1 : 0)
+        
+                    afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
+                }
+            }
+        }
+
+        stage('US pour Mai') {
+            when {
+                expression { params.MOIS == 'Mai' }
+            }
+            steps {
+                script {
+                    def tasksPossible = 4  // Ajustez le nombre de tâches possibles pour Mai selon vos besoins
+        
+                    def confirmVoyage = input(message: 'US de Mai: Avez-vous réalisé un voyage?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseVoyage')])
+                    echo "Faire un voyage: ${confirmVoyage}"
+        
+                    def confirmCrocheter = input(message: 'US de Mai: Avez-vous crocheter quelque chose?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseCrocheter')])
+                    echo "Crocheter quelque chose: ${confirmCrocheter}"
+        
+                    def confirmSalsa = input(message: 'US de Mai: Avez-vous dansé la salsa?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseSalsa')])
+                    echo "Danser la salsa: ${confirmSalsa}"
+        
+                    def confirmMarathon = input(message: 'US de Mai: Avez-vous participé à un marathon?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseMarathon')])
+                    echo "Participer à un marathon: ${confirmMarathon}"
+        
+                    // Ajoutez ici des interactions pour d'autres US de Mai si nécessaire
+                    def tasksRealized = (confirmVoyage ? 1 : 0) + (confirmCrocheter ? 1 : 0) + (confirmSalsa ? 1 : 0) + (confirmMarathon ? 1 : 0)
+        
+                    afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
+                }
+            }
+        }
+
+        stage('US pour Juin') {
+            when {
+                expression { params.MOIS == 'Juin' }
+            }
+            steps {
+                script {
+                    def tasksPossible = 4  // Ajustez le nombre de tâches possibles pour Juin selon vos besoins
+        
+                    def confirmGeste = input(message: 'US de Juin: Avez-vous réalisé un geste significatif?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseGeste')])
+                    echo "Réalisé un geste significatif: ${confirmGeste}"
+        
+                    def confirmDiner = input(message: 'US de Juin: Avez-vous organisé un dîner spécial?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseDiner')])
+                    echo "Organisé un dîner spécial: ${confirmDiner}"
+        
+                    def confirmProchesWeekend = input(message: 'US de Juin: Avez-vous passé du temps avec vos proches ce week-end?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseProchesWeekend')])
+                    echo "Passé du temps avec vos proches ce week-end: ${confirmProchesWeekend}"
+        
+                    def confirmProches = input(message: 'US de Juin: Avez-vous passé du temps de qualité avec vos proches?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseProches')])
+                    echo "Passé du temps de qualité avec vos proches: ${confirmProches}"
+        
+                    // Ajoutez ici des interactions pour d'autres US de Juin si nécessaire
+                    def tasksRealized = (confirmGeste ? 1 : 0) + (confirmDiner ? 1 : 0) + (confirmProchesWeekend ? 1 : 0) + (confirmProches ? 1 : 0)
+        
+                    afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
+                }
+            }
+        }
+
+        stage('US pour Juillet') {
+            when {
+                expression { params.MOIS == 'Juillet' }
+            }
+            steps {
+                script {
+                    def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Juillet selon vos besoins
+                    def confirmProfiter = input(message: 'US de Juillet: Avez-vous profité?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseProfiter')])
+                    echo "Profiter: ${confirmProfiter}"
+        
+                    // Ajoutez ici des interactions pour d'autres US de Juillet si nécessaire
+                    def tasksRealized = confirmProfiter ? 1 : 0
+        
+                    afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
+                }
+            }
+        }
+
+        stage('US pour Août') {
+            when {
+                expression { params.MOIS == 'Août' }
+            }
+            steps {
+                script {
+                    def tasksPossible = 4  // Ajustez le nombre de tâches possibles pour Août selon vos besoins
+        
+                    def confirmRayonsSoleil = input(message: 'US d\'Août: Avez-vous regardé les premiers rayons du soleil?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseRayonsSoleil')])
+                    echo "Regarder les premiers rayons du soleil: ${confirmRayonsSoleil}"
+        
+                    def confirmContemplezEtoiles = input(message: 'US d\'Août: Avez-vous contemplé les étoiles?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseContemplezEtoiles')])
+                    echo "Contempler les étoiles: ${confirmContemplezEtoiles}"
+        
+                    def confirmBainMinuit = input(message: 'US d\'Août: Avez-vous pris un bain de minuit?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseBainMinuit')])
+                    echo "Prendre un bain de minuit: ${confirmBainMinuit}"
+        
+                    def confirmDormirPlage = input(message: 'US d\'Août: Avez-vous dormi sur la plage?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseDormirPlage')])
+                    echo "Dormir sur la plage: ${confirmDormirPlage}"
+        
+                    // Ajoutez ici des interactions pour d'autres US d'Août si nécessaire
+                    def tasksRealized = (confirmRayonsSoleil ? 1 : 0) + (confirmContemplezEtoiles ? 1 : 0) + (confirmBainMinuit ? 1 : 0) + (confirmDormirPlage ? 1 : 0)
+        
+                    afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
+                }
+            }
+        }
+
 
         stage('US pour Septembre') {
         when {
