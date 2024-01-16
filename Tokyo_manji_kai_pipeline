@@ -1,25 +1,31 @@
 def afficherMessagePourcentageTaches(dateDuJour, tasksRealized, tasksPossible) {
-    def pourcentageRealise = (tasksRealized / tasksPossible) * 100
+    if (tasksRealized != 0) {
+        def pourcentageRealise = (tasksRealized / tasksPossible) * 100
 
-    if (pourcentageRealise >= 100) {
-        echo "Félicitations ! Vous avez accompli toutes vos tâches pour ce mois. Vous pouvez avancer sur le mois suivant."
-    } else if (dateDuJour.toInteger() > 15) {
-        echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
-        if (pourcentageRealise < 50) {
-            echo "Message: Vous êtes en retard et avez accompli moins de 50% de vos tâches. Il est temps d'accélérer."
+        if (pourcentageRealise >= 100) {
+            echo "Félicitations ! Vous avez accompli toutes vos tâches pour ce mois. Vous pouvez avancer sur le mois suivant."
+        } else if (dateDuJour.toInteger() > 15) {
+            echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
+            if (pourcentageRealise < 50) {
+                echo "Message: Vous êtes en retard et avez accompli moins de 50% de vos tâches. Il est temps d'accélérer."
+            } else {
+                echo "Message: Vous êtes en retard mais avez accompli plus de 50% de vos tâches. Continuez vos efforts."
+            }
         } else {
-            echo "Message: Vous êtes en retard mais avez accompli plus de R50% de vos tâches. Continuez vos efforts."
+            if (pourcentageRealise < 50) {
+                echo "Message: Vous êtes dans les délais mais avez accompli moins de 50% de vos tâches. Améliorez votre rythme."
+            } else {
+                echo "Message: Vous êtes dans les délais et avez accompli plus de 50% de vos tâches. Continuez le bon travail."
+            }
         }
-    } else {R
-        if (pourcentageRealise < 50) {
-            echo "Message: Vous êtes dans les délais mais avez accompli moins de 50% de vos tâches. Améliorez votre rythme."
+    } else {
+        if (dateDuJour.toInteger() > 15) {
+            echo "Aucune tâche réalisée jusqu'à présent. Nous sommes après le 15e jour du mois. Il peut être difficile de tout accomplir ce mois-ci. Continuez vos efforts."
         } else {
-            echo "Message: Vous êtes dans les délais et avez accompli plus de 50% de vos tâches. Continuez le bon travail."
+            echo "Aucune tâche réalisée jusqu'à présent. Vous êtes encore dans les délais pour accomplir vos tâches ce mois-ci. Continuez vos efforts."
         }
     }
 }
-
-
 
 pipeline {
     agent any
