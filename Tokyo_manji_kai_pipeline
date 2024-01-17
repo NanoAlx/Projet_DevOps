@@ -265,7 +265,7 @@ pipeline {
     }
 }
 
-stage('Epic pour Novembre') {
+stage('US pour Novembre') {
     when {
         expression { params.MOIS == 'Novembre' }
     }
