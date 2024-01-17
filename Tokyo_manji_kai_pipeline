@@ -22,25 +22,25 @@ def afficherMessageTachesRealisees(dateDuJour, tasksRealized, tasksPossible, jou
 
 def afficherMessagePourcentageRetard(pourcentageRealise, joursRestants) {
     if (pourcentageRealise < 50) {
-        echo "Message: Vous êtes en retard et avez accompli moins de 50% de vos tâches. Il est temps d'accélérer. Il vous reste ${joursRestants} jours."
+        echo "Message: Vous êtes en retard et avez accompli moins de 50% de vos tâches. Il est temps d'accélérer. Il vous reste ${joursRestants} jours avant la fin du mois."
     } else {
-        echo "Message: Vous êtes en retard mais avez accompli plus de 50% de vos tâches. Continuez vos efforts. Il vous reste ${joursRestants} jours."
+        echo "Message: Vous êtes en retard mais avez accompli plus de 50% de vos tâches. Continuez vos efforts. Il vous reste ${joursRestants} jours avant la fin du mois."
     }
 }
 
 def afficherMessagePourcentageDansLesDelais(pourcentageRealise, joursRestants) {
     if (pourcentageRealise < 50) {
-        echo "Message: Vous êtes dans les délais mais avez accompli moins de 50% de vos tâches. Améliorez votre rythme. Il vous reste ${joursRestants} jours."
+        echo "Message: Vous êtes dans les délais mais avez accompli moins de 50% de vos tâches. Améliorez votre rythme. Il vous reste ${joursRestants} jours avant la fin du mois."
     } else {
-        echo "Message: Vous êtes dans les délais et avez accompli plus de 50% de vos tâches. Continuez le bon travail. Il vous reste ${joursRestants} jours."
+        echo "Message: Vous êtes dans les délais et avez accompli plus de 50% de vos tâches. Continuez le bon travail. Il vous reste ${joursRestants} jours avant la fin du mois."
     }
 }
 
 def afficherMessageAucuneTache(dateDuJour, joursRestants) {
     if (dateDuJour.toInteger() > 15) {
-        echo "Aucune tâche réalisée jusqu'à présent. Nous sommes après le 15e jour du mois. Il peut être difficile de tout accomplir ce mois-ci. Continuez vos efforts."
+        echo "Aucune tâche réalisée jusqu'à présent. Nous sommes après le 15e jour du mois. Il peut être difficile de tout accomplir ce mois-ci. Continuez vos efforts. Il vous reste ${joursRestants} jours avant la fin du mois"
     } else {
-        echo "Aucune tâche réalisée jusqu'à présent. Vous êtes encore dans les délais pour accomplir vos tâches ce mois-ci. Continuez vos efforts. Il vous reste ${joursRestants} jours."
+        echo "Aucune tâche réalisée jusqu'à présent. Vous êtes encore dans les délais pour accomplir vos tâches ce mois-ci. Continuez vos efforts. Il vous reste ${joursRestants} jours avant la fin du mois."
     }
 }
 
