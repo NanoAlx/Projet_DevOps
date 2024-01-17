@@ -51,7 +51,7 @@ pipeline {
         choice(name: 'DATE_DU_JOUR', choices: ['1', '2', '3', '4', '5', '6', '7','8', '9', '10','11', '12','13', '14', '15', '16', '17', '18', '19','20', '21', '22','23', '24','25','26','27','28','29','30','31'], description: 'Quel est la date du jour ?')
     }
     stages {
-        stage('US pour Janvier') {
+        stage('Janvier') {
             when {
                 expression { params.MOIS == 'Janvier' }
             }
@@ -68,7 +68,7 @@ pipeline {
             }
         }
 
-        stage('US pour Février') {
+        stage('Février') {
             when {
                 expression { params.MOIS == 'Fevrier' }
             }
@@ -84,7 +84,7 @@ pipeline {
             }
         }
 
-        stage('US pour Mars') {
+        stage('Mars') {
             when {
                 expression { params.MOIS == 'Mars' }
             }
@@ -109,7 +109,7 @@ pipeline {
                 }
             }
         }
-        stage('US pour Avril') {
+        stage('Avril') {
             when {
                 expression { params.MOIS == 'Avril' }
             }
@@ -127,7 +127,7 @@ pipeline {
             }
         }
 
-        stage('US pour Mai') {
+        stage('Mai') {
             when {
                 expression { params.MOIS == 'Mai' }
             }
@@ -154,7 +154,7 @@ pipeline {
             }
         }
 
-        stage('US pour Juin') {
+        stage('Juin') {
             when {
                 expression { params.MOIS == 'Juin' }
             }
@@ -181,7 +181,7 @@ pipeline {
             }
         }
 
-        stage('US pour Juillet') {
+        stage('Juillet') {
             when {
                 expression { params.MOIS == 'Juillet' }
             }
@@ -198,7 +198,7 @@ pipeline {
             }
         }
 
-        stage('US pour Août') {
+        stage('Août') {
             when {
                 expression { params.MOIS == 'Aout' }
             }
@@ -226,7 +226,7 @@ pipeline {
         }
 
 
-        stage('US pour Septembre') {
+        stage('Septembre') {
         when {
             expression { params.MOIS == 'Septembre' }
         }
@@ -247,7 +247,7 @@ pipeline {
         }
     }
 
-    stage('US pour Octobre') {
+    stage('Octobre') {
     when {
         expression { params.MOIS == 'Octobre' }
     }
@@ -265,7 +265,7 @@ pipeline {
     }
 }
 
-stage('US pour Novembre') {
+stage('Novembre') {
     when {
         expression { params.MOIS == 'Novembre' }
     }
@@ -283,8 +283,7 @@ stage('US pour Novembre') {
     }
 }
 
-// Étape pour Décembre
-stage('US pour Décembre') {
+stage('Décembre') {
     when {
         expression { params.MOIS == 'Decembre' }
     }
