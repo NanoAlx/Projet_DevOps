@@ -57,16 +57,15 @@ pipeline {
             }
             steps {
                 script {
-                    def tasksPossible = 1  // Ajus//tez le nombre de tâches possibles pour Janvier selon vos besoins
+                    def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Janvier selon vos besoins
                     def confirmJournal = input(message: 'US de JanviRer: Avez-vous rédigé un journal intime?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseJournal')])
                     echo "Rédiger un journal intime: ${confirmJournal}"
 
-                    // Ajoutez ici des interactions pour d'autres US de Janvier si nécessaire
                     def tasksRealized = confirmJournal ? 1 : 0
                  
                     afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
                 }
-            }//
+            }
         }
 
         stage('US pour Février') {
@@ -75,11 +74,10 @@ pipeline {
             }
             steps {
                 script {
-                    def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Février selon vos besoins
+                    def tasksPossible = 1  
                     def confirmEspace = input(message: 'US de Février: Avez-vous rendu votre espace plus agréable?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseEspace')])
                     echo "Rendre votre espace plus agréable: ${confirmEspace}"
 
-                    // Ajoutez ici des interactions pour d'autres US de Février si nécessaire
                     def tasksRealized = confirmEspace ? 1 : 0
                     afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
                 }
@@ -92,7 +90,7 @@ pipeline {
             }
             steps {
                 script {
-                    def tasksPossible = 4  // Ajustez le nombre de tâches possibles pour Mars selon vos besoins
+                    def tasksPossible = 4 
                     def confirmManger = input(message: 'US de Mars: Avez-vous bien mangé?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseManger')])
                     echo "Bien manger: ${confirmManger}"
 
@@ -105,7 +103,6 @@ pipeline {
                     def confirmSoin = input(message: 'US de Mars: Avez-vous pris soin de vous?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseSoin')])
                     echo "Prendre soin de soi: ${confirmSoin}"
 
-                    // Ajoutez ici des interactions pour d'autres US de Mars si nécessaire
                     def tasksRealized = (confirmManger ? 1 : 0) + (confirmExercice ? 1 : 0) + (confirmFumer ? 1 : 0) + (confirmSoin ? 1 : 0)
                     
                    afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
@@ -118,12 +115,11 @@ pipeline {
             }
             steps {
                 script {
-                    def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Avril selon vos besoins
+                    def tasksPossible = 1
         
                     def confirmGentil = input(message: 'US d\'Avril: Avez-vous été gentil aujourd\'hui?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseGentil')])
                     echo "Été gentil: ${confirmGentil}"
         
-                    // Ajoutez ici des interactions pour d'autres US d'Avril si nécessaire
                     def tasksRealized = (confirmGentil ? 1 : 0)
         
                     afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
@@ -137,7 +133,7 @@ pipeline {
             }
             steps {
                 script {
-                    def tasksPossible = 4  // Ajustez le nombre de tâches possibles pour Mai selon vos besoins
+                    def tasksPossible = 4
         
                     def confirmVoyage = input(message: 'US de Mai: Avez-vous réalisé un voyage?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseVoyage')])
                     echo "Faire un voyage: ${confirmVoyage}"
@@ -151,7 +147,6 @@ pipeline {
                     def confirmMarathon = input(message: 'US de Mai: Avez-vous participé à un marathon?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseMarathon')])
                     echo "Participer à un marathon: ${confirmMarathon}"
         
-                    // Ajoutez ici des interactions pour d'autres US de Mai si nécessaire
                     def tasksRealized = (confirmVoyage ? 1 : 0) + (confirmCrocheter ? 1 : 0) + (confirmSalsa ? 1 : 0) + (confirmMarathon ? 1 : 0)
         
                     afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
@@ -165,7 +160,7 @@ pipeline {
             }
             steps {
                 script {
-                    def tasksPossible = 4  // Ajustez le nombre de tâches possibles pour Juin selon vos besoins
+                    def tasksPossible = 4
         
                     def confirmGeste = input(message: 'US de Juin: Avez-vous réalisé un geste significatif?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseGeste')])
                     echo "Réalisé un geste significatif: ${confirmGeste}"
@@ -178,8 +173,7 @@ pipeline {
         
                     def confirmProches = input(message: 'US de Juin: Avez-vous passé du temps de qualité avec vos proches?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseProches')])
                     echo "Passé du temps de qualité avec vos proches: ${confirmProches}"
-        
-                    // Ajoutez ici des interactions pour d'autres US de Juin si nécessaire
+
                     def tasksRealized = (confirmGeste ? 1 : 0) + (confirmDiner ? 1 : 0) + (confirmProchesWeekend ? 1 : 0) + (confirmProches ? 1 : 0)
         
                     afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
@@ -193,11 +187,10 @@ pipeline {
             }
             steps {
                 script {
-                    def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Juillet selon vos besoins
+                    def tasksPossible = 1
                     def confirmProfiter = input(message: 'US de Juillet: Avez-vous profité?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseProfiter')])
                     echo "Profiter: ${confirmProfiter}"
         
-                    // Ajoutez ici des interactions pour d'autres US de Juillet si nécessaire
                     def tasksRealized = confirmProfiter ? 1 : 0
         
                     afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
@@ -211,7 +204,7 @@ pipeline {
             }
             steps {
                 script {
-                    def tasksPossible = 4  // Ajustez le nombre de tâches possibles pour Août selon vos besoins
+                    def tasksPossible = 4
         
                     def confirmRayonsSoleil = input(message: 'US d\'Août: Avez-vous regardé les premiers rayons du soleil?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseRayonsSoleil')])
                     echo "Regarder les premiers rayons du soleil: ${confirmRayonsSoleil}"
@@ -225,7 +218,6 @@ pipeline {
                     def confirmDormirPlage = input(message: 'US d\'Août: Avez-vous dormi sur la plage?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseDormirPlage')])
                     echo "Dormir sur la plage: ${confirmDormirPlage}"
         
-                    // Ajoutez ici des interactions pour d'autres US d'Août si nécessaire
                     def tasksRealized = (confirmRayonsSoleil ? 1 : 0) + (confirmContemplezEtoiles ? 1 : 0) + (confirmBainMinuit ? 1 : 0) + (confirmDormirPlage ? 1 : 0)
         
                     afficherMessagePourcentageTaches(params.DATE_DU_JOUR, tasksRealized, tasksPossible)
@@ -240,7 +232,7 @@ pipeline {
         }
         steps {
             script {
-                def tasksPossible = 2  // Ajustez le nombre de tâches possibles pour Septembre selon vos besoins
+                def tasksPossible = 2
     
                 def confirmExplore = input(message: 'US de Septembre: Avez-vous exploré de nouveaux terrains?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseExplore')])
                 echo "Explorer de nouveaux terrains: ${confirmExplore}"
@@ -261,7 +253,7 @@ pipeline {
     }
     steps {
         script {
-            def tasksPossible = 1  // Ajustez le nombre de tâches possibles pour Octobre selon vos besoins
+            def tasksPossible = 1
 
             def confirmNewKnowledge = input(message: 'US d\'Octobre: Avez-vous acquis de nouvelles connaissances?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseNewKnowledge')])
             echo "Acquérir de nouvelles connaissances: ${confirmNewKnowledge}"
@@ -279,7 +271,7 @@ stage('Epic pour Novembre') {
     }
     steps {
         script {
-            def tasksPossibleEpic = 1  // Ajustez le nombre de tâches possibles pour l'épic de Novembre selon vos besoins
+            def tasksPossibleEpic = 1
 
             def confirmPlayInstrument = input(message: 'Epic de Novembre: Avez-vous appris à jouer d\'un instrument?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealisePlayInstrument')])
             echo "Apprendre à jouer d'un instrument: ${confirmPlayInstrument}"
@@ -298,7 +290,7 @@ stage('US pour Décembre') {
     }
     steps {
         script {
-            def tasksPossibleDecembre = 1  // Ajustez le nombre de tâches possibles pour Décembre selon vos besoins
+            def tasksPossibleDecembre = 1
 
             def confirmBreathingExercise = input(message: 'US de Décembre: Avez-vous fait 5 minutes de prise de conscience sur votre respiration?', ok: 'Confirmer', parameters: [booleanParam(defaultValue: false, description: 'Cochez si réalisé', name: 'RealiseBreathingExercise')])
             echo "5 minutes de prise de conscience sur la respiration: ${confirmBreathingExercise}"
