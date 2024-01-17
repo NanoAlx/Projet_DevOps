@@ -1,29 +1,47 @@
 def afficherMessagePourcentageTaches(dateDuJour, tasksRealized, tasksPossible) {
-    if (tasksRealized != 0) {
-        def pourcentageRealise = (tasksRealized / tasksPossible) * 100
+    def joursRestants = 31 - dateDuJour.toInteger()
 
-        if (pourcentageRealise >= 100) {
-            echo "Félicitations ! Vous avez accompli toutes vos tâches pour ce mois. Vous pouvez avancer sur le mois suivant."
-        } else if (dateDuJour.toInteger() > 15) {
-            echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
-            if (pourcentageRealise < 50) {
-                echo "Message: Vous êtes en retard et avez accompli moins de 50% de vos tâches. Il est temps d'accélérer."
-            } else {
-                echo "Message: Vous êtes en retard mais avez accompli plus de 50% de vos tâches. Continuez vos efforts."
-            }
-        } else {
-            if (pourcentageRealise < 50) {
-                echo "Message: Vous êtes dans les délais mais avez accompli moins de 50% de vos tâches. Améliorez votre rythme."
-            } else {
-                echo "Message: Vous êtes dans les délais et avez accompli plus de 50% de vos tâches. Continuez le bon travail."
-            }
-        }
+    if (tasksRealized != 0) {
+        afficherMessageTachesRealisees(dateDuJour, tasksRealized, tasksPossible, joursRestants)
     } else {
-        if (dateDuJour.toInteger() > 15) {
-            echo "Aucune tâche réalisée jusqu'à présent. Nous sommes après le 15e jour du mois. Il peut être difficile de tout accomplir ce mois-ci. Continuez vos efforts."
-        } else {
-            echo "Aucune tâche réalisée jusqu'à présent. Vous êtes encore dans les délais pour accomplir vos tâches ce mois-ci. Continuez vos efforts."
-        }
+        afficherMessageAucuneTache(dateDuJour, joursRestants)
+    }
+}
+
+def afficherMessageTachesRealisees(dateDuJour, tasksRealized, tasksPossible, joursRestants) {
+    def pourcentageRealise = (tasksRealized / tasksPossible) * 100
+
+    if (pourcentageRealise >= 100) {
+        echo "Félicitations ! Vous avez accompli toutes vos tâches pour ce mois. Vous pouvez avancer sur le mois suivant."
+    } else if (dateDuJour.toInteger() > 15) {
+        echo "Attention: Nous sommes après le 15e jour du mois. Veuillez accélérer le rythme des tâches."
+        afficherMessagePourcentageRetard(pourcentageRealise, joursRestants)
+    } else {
+        afficherMessagePourcentageDansLesDelais(pourcentageRealise, joursRestants)
+    }
+}
+
+def afficherMessagePourcentageRetard(pourcentageRealise, joursRestants) {
+    if (pourcentageRealise < 50) {
+        echo "Message: Vous êtes en retard et avez accompli moins de 50% de vos tâches. Il est temps d'accélérer. Il vous reste ${joursRestants} jours."
+    } else {
+        echo "Message: Vous êtes en retard mais avez accompli plus de 50% de vos tâches. Continuez vos efforts. Il vous reste ${joursRestants} jours."
+    }
+}
+
+def afficherMessagePourcentageDansLesDelais(pourcentageRealise, joursRestants) {
+    if (pourcentageRealise < 50) {
+        echo "Message: Vous êtes dans les délais mais avez accompli moins de 50% de vos tâches. Améliorez votre rythme. Il vous reste ${joursRestants} jours."
+    } else {
+        echo "Message: Vous êtes dans les délais et avez accompli plus de 50% de vos tâches. Continuez le bon travail. Il vous reste ${joursRestants} jours."
+    }
+}
+
+def afficherMessageAucuneTache(dateDuJour, joursRestants) {
+    if (dateDuJour.toInteger() > 15) {
+        echo "Aucune tâche réalisée jusqu'à présent. Nous sommes après le 15e jour du mois. Il peut être difficile de tout accomplir ce mois-ci. Continuez vos efforts."
+    } else {
+        echo "Aucune tâche réalisée jusqu'à présent. Vous êtes encore dans les délais pour accomplir vos tâches ce mois-ci. Continuez vos efforts. Il vous reste ${joursRestants} jours."
     }
 }
 
